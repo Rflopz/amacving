@@ -1,30 +1,34 @@
 <script>
-	export let name;
+	import theme from './store/theme'
+	import { onMount } from 'svelte'
+
+	import Navbar from './components/navbar.svelte'
+
+	onMount( async () => {
+		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) )
+            theme.set( 'dark' )
+        else 
+            theme.set( 'light' )	
+	})
+
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<div class={$theme}>
 
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+    <div class="absolute p-4 w-screen h-full bg-gray-300 dark:bg-gray-600">
+		<Navbar />
+	</div>
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
+</div>
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+
+<style global lang="postcss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  body {
+	  margin: 0; 
+	  padding: 0;
+  }
 </style>
