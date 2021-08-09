@@ -1,8 +1,9 @@
 <script>
-	import theme from './store/theme'
+	import theme from './store/Theme'
 	import { onMount } from 'svelte'
 
-	import Navbar from './components/navbar.svelte'
+	import Navbar from './Components/Navbar.svelte'
+	import Stadistics from './Components/Stadistics.svelte'
 
 	onMount( async () => {
 		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) )
@@ -15,8 +16,9 @@
 
 <div class={$theme}>
 
-    <div class="absolute p-4 w-screen h-full bg-gray-300 dark:bg-gray-600">
+    <div class="absolute p-4 w-screen h-full bg-gray-300 dark:bg-trueGray-700">
 		<Navbar />
+		<Stadistics />
 	</div>
 
 </div>
